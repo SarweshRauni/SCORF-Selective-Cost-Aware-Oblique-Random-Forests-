@@ -11,22 +11,6 @@ Highlights
 	•	Stress testing. Turn-key experiments for Clean, Covariate Shift, Asymmetric Label Noise, and MCAR Missingness.
 	•	Baselines & ablations. CRC-style confidence thresholding, HGBT/XGBoost, RotationForest, RerF; hyper-parameter sensitivity, surrogate-for-gradient study, runtime scaling.
 
-⸻
-
-Repository structure (suggested)
-
-.
-├── README.md
-├── scorf.py                 # this file (all code shown below)
-└── data/
-    ├── UCI_Credit_Card.csv  # UCI Credit Card Default
-    ├── heloc_dataset_v1.csv # HELOC
-    └── cs-training.csv      # Give Me Some Credit (Kaggle)
-
-If your entrypoint file is named differently, replace scorf.py in the commands below with your filename.
-
-⸻
-
 Installation
 
 Tested with Python ≥ 3.9.
@@ -40,7 +24,6 @@ pip install -U numpy scipy scikit-learn pandas
 # 3) Optional baselines (install what you need)
 pip install xgboost lightgbm rerf rotation-forest
 
-The code try/except-imports optional packages; if a package isn’t installed, the corresponding baseline is skipped gracefully.
 
 ⸻
 
@@ -98,7 +81,7 @@ run_paper_like(dataset_key="uci", seeds=10)   # keys: "uci", "heloc", "gmsc"
 
 ⸻
 
-What the code does (at a glance)
+What the code does 
 	1.	Imputation. Median imputer for numerical features.
 	2.	Gradient surrogate. Fit a small RF on a subsample then compute finite-difference gradients of P(y{=}1\mid x).
 	3.	Spectral sensitivity. Form S=\frac{1}{m}G^\top G, shrink eigenvalues via \lambda/(\lambda+\gamma) to get transform H.
@@ -167,7 +150,7 @@ Reproducibility notes
 
 ⸻
 
-Limitations (practical)
+Limitations 
 	•	The covariate shift simulator uses fixed offsets on high-variance features (not dataset-specific drift modeling).
 	•	Missingness is MCAR; other mechanisms (MAR/MNAR) are not modeled here.
 	•	The CRC-style baseline uses a confidence-margin heuristic for thresholding; it serves as a lightweight reference, not a full CRC implementation.
@@ -185,15 +168,6 @@ If this code helps your work, please cite this repository:
   url    = {https://github.com/<your-org>/<your-repo>}
 }
 
-(Replace the URL once your repository is public.)
-
-⸻
-
-License
-
-Choose a license that matches your goals (e.g., MIT, Apache-2.0, BSD-3-Clause) and add it as LICENSE. Until then, this code is “all rights reserved” by default.
-
-⸻
 
 Contributing
 
